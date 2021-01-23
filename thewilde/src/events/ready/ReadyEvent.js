@@ -4,15 +4,20 @@ module.exports = class ReadyEvent extends BaseEvent {
   constructor() {
     super('ready');
   }
+  
   async run(client) {
+    let serverIn = await client.guilds.cache.size;
     console.log(client.user.tag + ' has logged in.');
     client.user.setPresence({ 
       activity: { 
-        name: 'with discord.js' 
+        name: `${serverIn} servers.`,
+        type: "WATCHING" 
       },
-      status: 'idle' 
+      status: 'online' 
     })
-      .then(console.log)
+      .catch(console.error);
+      client.user.setUsername(`${client.prefix} ${client.user.username}`)
+      .then(user => console.log(`My new username is ${user.username}`))
       .catch(console.error);
   }
 }
