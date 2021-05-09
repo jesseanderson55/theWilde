@@ -25,6 +25,7 @@ module.exports = class KickCommand extends BaseCommand {
     //Input Checking:
     if (!args[0]) return message.channel.send("Please state a user. \'-kick @user reason\'");
     if (!mentionedMember) return message.channel.send("Not a valid member.");
+    if (!memberSelected.kickable) return message.channel.send('I cannot kick that member.');
 
     //Executing:
 

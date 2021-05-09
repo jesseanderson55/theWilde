@@ -13,13 +13,13 @@ module.exports = class BanCommand extends BaseCommand {
 
     //Variables:
     let reasonForBan = args.slice(1).join(" ");
-    const memberSelected = message.mentions.member.first();
+    const memberSelected = message.mentions.members.first();
 
     //Input Checking:
     if (!reasonForBan) reasonForBan = 'No reason given.';
     if(!args[0]) return message.channel.send(`Member to ban must be selected. \'-ban @user reason\'`)
     if (!memberSelected) return message.channel.send('The member doesnt exist on this server.');
-
+    if(!memberSelected.bannable) return message.channel.send('I cannot ban that member.')
     //Executing:
   }
 }
